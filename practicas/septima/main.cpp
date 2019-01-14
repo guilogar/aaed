@@ -2,30 +2,34 @@
 #include <cstring>
 #include <algorithm>
 #include "listaCircular.h"
+#include "listaOrdenada.h"
 #include "pila.h"
 
 using namespace std;
-void imprimir_lista(ListaCircular<int> l) {
-    ListaCircular<int>::posicion p = l.inipos();
-    int number = 0;
-    
-    if(p != POS_NULA)
-    {
-        //p = l.anterior(p);
-        number = l.elemento(p);
-        cout << number << "; ";
-        p = l.siguiente(p);
-        
-        while(p != l.inipos())
-        {
-            //p = l.anterior(p);
-            number = l.elemento(p);
-            cout << number << "; ";
-            p = l.siguiente(p);
-        }
-    }
-    cout << endl;
-}
+/*
+ *void imprimir_lista(ListaCircular<int> l) {
+ *    ListaCircular<int>::posicion p = l.inipos();
+ *    int number = 0;
+ *    
+ *    if(p != POS_NULA)
+ *    {
+ *        //p = l.anterior(p);
+ *        number = l.elemento(p);
+ *        cout << number << "; ";
+ *        p = l.siguiente(p);
+ *        
+ *        while(p != l.inipos())
+ *        {
+ *            //p = l.anterior(p);
+ *            number = l.elemento(p);
+ *            cout << number << "; ";
+ *            p = l.siguiente(p);
+ *        }
+ *    }
+ *    cout << endl;
+ *}
+ */
+
 
 
 int num_aleat_int(int a, int b)
@@ -60,6 +64,20 @@ int zafo(ListaCircular<int> &lista, ListaCircular<int>::posicion p) {
     return number;
 }
 
+void imprimir_lista(Lista<int> l) {
+    Lista<int>::posicion p = l.primera();
+    int number = 0;
+    
+    while(p != l.fin())
+    {
+        //p = l.anterior(p);
+        number = l.elemento(p);
+        cout << number << "; ";
+        p = l.siguiente(p);
+    }
+    cout << endl;
+}
+
 int main(int argc, const char *argv[])
 {
     /*
@@ -79,18 +97,29 @@ int main(int argc, const char *argv[])
     //int ganador = zafo(l, l.inipos());
     //std::cout << "El ganador es => " << ganador << "." << std::endl;
     
-    ListaCircular<Pila<int>> l;
-    srand(time(0));
-    
-    for(int i = 1; i <= 10; i++) {
-        
-        Pila<int> p;
-        p.push(num_aleat_int(1, 10));
-        p.push(num_aleat_int(1, 10));
-        p.push(num_aleat_int(1, 10));
-        p.push(num_aleat_int(1, 10));
-        l.insertar(p, l.fin());
+    /*
+     *ListaCircular<Pila<int>> l;
+     *srand(time(0));
+     *
+     *for(int i = 1; i <= 10; i++) {
+     *    
+     *    Pila<int> p;
+     *    p.push(num_aleat_int(1, 10));
+     *    p.push(num_aleat_int(1, 10));
+     *    p.push(num_aleat_int(1, 10));
+     *    p.push(num_aleat_int(1, 10));
+     *    l.insertar(p, l.fin());
+     *}
+     *l.~ListaCircular();
+     */
+    Lista<int> l;
+    for(int i = -1; i >= -10; i--) {
+        l.insertar(i);
     }
-    l.~ListaCircular();
+    for(int i = 1; i <= 10; i++) {
+        l.insertar(i);
+    }
+    l.elemento(l.primera()) = 65465;
+    imprimir_lista(l);
     return 0;
 }
